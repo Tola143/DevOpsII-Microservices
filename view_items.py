@@ -1,13 +1,11 @@
 from flask import Flask, request, jsonify
-import datetime
-
 import data_item as us
 
 app = Flask(__name__)
 
-@app.route('/item', methods=['GET'])
-def item():
-    _item = us.user_name()
+@app.route('/items', methods=['GET'])
+def items():
+    _item = us.items()
     return jsonify(_item)
 
 if __name__ == '__main__':

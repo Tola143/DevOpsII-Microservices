@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import datetime
 import data_item as us
 
 app = Flask(__name__)
@@ -11,13 +10,13 @@ def add_item():
     price = request.form.get('price')
     instock = request.form.get('instock')
 
-    _user = us.user_name()
+    _user = us.items()
     data = [x for x in _user if x["name"]== name]
 
     if (data):
         return jsonify({'message': 'Cannot create user.'}), 401
     else:
-        us.user_name_add(name, category, price, instock)
+        us.item_add(name, category, price, instock)
         return jsonify({'message': 'Created successfully.'}), 200
 
 if __name__ == '__main__':

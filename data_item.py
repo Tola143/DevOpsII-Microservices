@@ -4,7 +4,7 @@ import os
 #File and path for database
 db_folder = os.path.join(os.path.dirname(__file__), "db_item.db")
 
-def user_name():
+def items():
     data = []
     conn = sqlite3.connect(db_folder)
     sql = """
@@ -27,7 +27,7 @@ def user_name():
     conn.close()
     return data
 
-def username(name):
+def item(name):
     data = []
     conn = sqlite3.connect(db_folder)
     sql = """
@@ -42,30 +42,30 @@ def username(name):
     conn.close()
     return data
 
-# def find_username(name):
-#     data = []
-#     conn = sqlite3.connect(db_folder)
-#     sql = """
-#         SELECT name, category, price, instock
-#         FROM items 
-#         WHERE name=?
-#     """
-#     val = (name,)
-#     cursor = conn.execute(sql,val)
-#     rows = cursor.fetchone()
+def find_item(name):
+    data = []
+    conn = sqlite3.connect(db_folder)
+    sql = """
+        SELECT name, category, price, instock
+        FROM items 
+        WHERE name=?
+    """
+    val = (name,)
+    cursor = conn.execute(sql,val)
+    rows = cursor.fetchone()
 
-#     record = {
-#         'name': rows[0],
-#         'category': rows[1],
-#         'price': rows[2],
-#         'instock': rows[3]
-#         }
-#     data.append(record)
+    record = {
+        'name': rows[0],
+        'category': rows[1],
+        'price': rows[2],
+        'instock': rows[3]
+        }
+    data.append(record)
     
-#     conn.close()
-#     return data
+    conn.close()
+    return data
 
-def user_name_add(name, category, price, instock):
+def item_add(name, category, price, instock):
     conn = sqlite3.connect(db_folder)
     sql = """
         INSERT INTO items(name, category, price, instock)
@@ -77,7 +77,7 @@ def user_name_add(name, category, price, instock):
     conn.close()
     return "Created successfully"
 
-def update_name(name, category, price, instock):
+def update_item(name, category, price, instock):
     conn = sqlite3.connect(db_folder)
     sql = """
         UPDATE items
@@ -91,7 +91,7 @@ def update_name(name, category, price, instock):
     conn.close()
     return "Updated successfully"
 
-def delete_user(name):
+def delete_item(name):
     conn = sqlite3.connect(db_folder)
     sql = f"""
         DELETE FROM items WHERE name = '{name}';

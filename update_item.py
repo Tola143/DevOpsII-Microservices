@@ -1,23 +1,20 @@
 from flask import Flask, request, jsonify
-import datetime
-# pip install Flask-JWT
-# import jwt
 import data_item as us
 
 app = Flask(__name__)
 
-@app.route('/update/<pre_name>', methods=['PATCH'])
+@app.route('/update/<pre_name>', methods=['POST'])
 def update(pre_name):
     name = request.form.get('name')
     category = request.form.get('category')
     price = request.form.get('price')
     instock = request.form.get('instock')
 
-    _item = us.username(pre_name)
+    _item = us.item(pre_name)
     
     if (_item):
         print(name, category, price, instock)
-        us.update_name(name, category, price, instock)
+        us.update_item(name, category, price, instock)
         return jsonify({'message': 'Updated successfully.'}), 200
     else:
         return jsonify({'message': 'Cannot update user.'}), 401
