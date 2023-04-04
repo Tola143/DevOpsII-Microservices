@@ -81,11 +81,10 @@ def update_item(name, category, price, instock):
     conn = sqlite3.connect(db_folder)
     sql = """
         UPDATE items
-        SET name = ?, category = ?, price = ?, instock = ?
-        WHERE name = ?
+        SET name=?, category=?, price=?, instock=?
+        WHERE name=?
     """
     val = (name, category, price, instock, name)
-    # cursor = conn.execute(sql, val)
     conn.execute(sql, val)
     conn.commit()  
     conn.close()
