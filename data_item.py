@@ -77,19 +77,17 @@ def item_add(name, category, price, instock):
     conn.close()
     return "Created successfully"
 
-def update_item(name, category, price, instock):
+def update_item(name, category, price, instock, pre_name):
     conn = sqlite3.connect(db_folder)
-    sql = """
-        UPDATE items
-        SET name=?, category=?, price=?, instock=?
-        WHERE name=?
-    """
-    val = (name, category, price, instock, name)
-    conn.execute(sql, val)
+    cur = conn.cursor()
+    sql = "UPDATE items SET name=?, category=?, price=?, instock=? WHERE name=?"
+    var = (name, category, price, instock, pre_name)
+    conn.execute(sql, var)
     conn.commit()  
     conn.close()
     return "Updated successfully"
 
+        
 def delete_item(name):
     conn = sqlite3.connect(db_folder)
     sql = f"""

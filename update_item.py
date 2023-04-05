@@ -10,11 +10,15 @@ def update(pre_name):
     price = request.form.get('price')
     instock = request.form.get('instock')
 
+    print(name, category, price, instock)
+
     _item = us.item(pre_name)
+    
+    id_name = _item[0][0]
 
     if request.method == "PUT":
-        if (_item):
-            us.update_item(name, category, price, instock)
+        if (id_name == pre_name):
+            us.update_item(name, category, price, instock, pre_name)
             return jsonify({'message': 'Updated successfully.'}), 200
         else:
             return jsonify({'message': 'Cannot update user.'}), 401
